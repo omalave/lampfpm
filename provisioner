@@ -5,7 +5,7 @@ apt-get install -y apache2
 apt-get install -y php
 apt-get install -y libapache2-mod-php
 apt-get install -y php7.0-mbstring
-
+apt-get install -y php7.0-mysql
 
 a2enmod proxy_fcgi
 
@@ -13,6 +13,10 @@ sed -i "s/^listen =.*/listen = 127.0.0.1:9000/" /etc/php/7.0/fpm/pool.d/www.conf
 sed -i "s/^<\/VirtualHost>/ProxyPassMatch ^\/(.*\\.php(\/.*)?)$ fcgi:\/\/127.0.0.1:9000\/var\/www\/html\/$1\n<\/VirtualHost>/" /etc/apache2/sites-enabled/000-default.conf
 sed -i "s/^<\/VirtualHost>/ProxyPassMatch ^\/(.*\\.php(\/.*)?)$ fcgi:\/\/127.0.0.1:9000\/var\/www\/html\/$1\n<\/VirtualHost>/" /etc/apache2/sites-available/000-default.conf
 
+sed -i 's/memory_limit = .*/memory_limit = '256M'/' /etc/php/7.0/fpm/php.ini
+sed -i 's/upload_max_filesize = .*/upload_max_filesize = '256M'/' /etc/php/7.0/fpm/php.ini
+sed -i 's/max_execution_time = .*/max_execution_time = '300'/' /etc/php/7.0/fpm/php.ini
+sed -i 's/post_max_size = .*/post_max_size = '256M'/' /etc/php/7.0/fpm/php.ini
 
 service apache2 restart
 service php7.0-fpm restart
