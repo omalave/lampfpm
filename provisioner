@@ -25,3 +25,5 @@ sed -i 's/post_max_size = .*/post_max_size = '256M'/' /etc/php/7.0/fpm/php.ini
 
 service apache2 restart
 service php7.0-fpm restart
+
+apt-get install -y composer
