@@ -23,6 +23,8 @@ sed -i 's/upload_max_filesize = .*/upload_max_filesize = '256M'/' /etc/php/7.0/f
 sed -i 's/max_execution_time = .*/max_execution_time = '300'/' /etc/php/7.0/fpm/php.ini
 sed -i 's/post_max_size = .*/post_max_size = '256M'/' /etc/php/7.0/fpm/php.ini
 
+sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+
 service apache2 restart
 service php7.0-fpm restart
 
